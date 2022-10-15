@@ -1,40 +1,108 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+
+const tech = [
+  "ferris",
+  "bun",
+  "css",
+  "graphql",
+  "js",
+  "svelte",
+  "aws",
+  "nextjs",
+  "zig",
+  "elm",
+  "firebase",
+  "go",
+  "vue",
+  "typescript",
+  "lighthouse",
+  "react",
+  "tailwind",
+  "deno",
+];
 ---
 
 <Layout title="webdev.london">
-	<main>
-		<h1>webdev<span class="text-gradient">.london</span></h1>
-		<p class="instructions">
-            The meetup for all things web, coming soon!
-		</p>
-	</main>
+  <main>
+    <h1>webdev<span class="text-gradient">.london</span></h1>
+    <p class="section">
+      The meetup for <u>everyone</u> who <u>loves the web</u>, coming soon.
+    </p>
+    <p class="section">
+      Free to attend! Reserve your place on <a href="">Meetup</a>.
+    </p>
+    <p class="section">
+      Follow us on Twitter <a href="https://www.twitter.com/webdev_london"
+        >@webdev_london</a
+      > so you never miss an event.
+    </p>
+    <div class="section">
+      <p>This week's meetup agenda:</p>
+      <p>
+        Angus Findlay (@angusjf): <em>"Bringing SSR & SSG to your React App"</em
+        >
+      </p>
+      <p>
+        Dan Belo Gonçalves (@?): <em>"Using XState on the Backend? idk"</em>
+      </p>
+    </div>
+    <p class="section tech">
+      {tech.map((x) => <img alt={x} src={`/${x}.svg`} />)}
+    </p>
+    <div class="section">
+      <p>
+        A place for people of all skill levels, whether you want to chat about
+        endofunctors or hello world.
+      </p>
+      <p>We value diversity of attendees and speakers super highly.</p>
+      <p>
+        Want to give a talk? We'd love to hear about it! Send us a DM over at <a
+          href="https://www.twitter.com/webdev_london">@webdev_london</a
+        >.
+      </p>
+      <p>
+        We're independent and community-organised. If you'd like to help us out,
+        host or sponsor an event, please reach out - we'd love to hear from you.
+      </p>
+    </div>
+  </main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 60ch;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .section {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+  }
+  .tech > img {
+    width: 100%;
+    height: 100%;
+  }
+  .tech {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    gap: 12px;
+  }
 </style>
