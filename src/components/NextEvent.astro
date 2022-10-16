@@ -30,7 +30,20 @@ const { className } = Astro.props;
     border-radius: 3px;
   }
 
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      top: 2rem;
+    }
+    to {
+      opacity: 1;
+      top: 0px;
+    }
+  }
+
   .next-event {
+    position: relative;
+    animation: 1s fade-in;
     text-align: left;
     max-width: 24rem;
     background-color: var(--off-white);
