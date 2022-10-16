@@ -1,0 +1,64 @@
+---
+const tech = [
+  "ferris",
+  "bun",
+  "graphql",
+  "js",
+  "svelte",
+  "react",
+  "aws",
+  "nextjs",
+  "zig",
+  "elm",
+  "firebase",
+  "go",
+  "vue",
+  "typescript",
+  "lighthouse",
+  "css",
+  "tailwind",
+  "deno",
+];
+---
+
+<div class="tech">
+  <p>we love tech</p>
+  <div class="grid">
+    {tech.map((x) => <img alt={x} src={`/${x}.svg`} />)}
+  </div>
+</div>
+
+<style>
+  .tech {
+    display: flex;
+    padding: 1rem 0rem 3rem 0rem;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--off-white);
+  }
+  .grid > img {
+    width: 100%;
+    height: 100%;
+    /* filter: grayscale(); */
+  }
+  .grid {
+    margin: auto;
+    max-width: var(--max-width);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 50px);
+    gap: 3rem 2rem;
+  }
+  @media (min-width: 700px) {
+    .grid {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(3, 50px);
+    }
+  }
+  @media (min-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(2, 50px);
+    }
+  }
+</style>

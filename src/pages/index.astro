@@ -1,26 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const tech = [
-  "ferris",
-  "bun",
-  "graphql",
-  "js",
-  "svelte",
-  "react",
-  "aws",
-  "nextjs",
-  "zig",
-  "elm",
-  "firebase",
-  "go",
-  "vue",
-  "typescript",
-  "lighthouse",
-  "css",
-  "tailwind",
-  "deno",
-];
+import Tech from "../components/Tech.astro";
 ---
 
 <Layout
@@ -28,20 +8,24 @@ const tech = [
   description="The meetup for everyone who loves the web, coming soon."
 >
   <main>
-    <h1>webdev<wbr /><span class="text-gradient">.london</span></h1>
-    <p class="section">
-      The meetup for <u>everyone</u> who <u>loves the web</u>, coming soon.
-    </p>
-    <div class="section">
-      <p>Free to attend! Reserve your place on Meetup.</p>
-      <p>Next event @ Location: x weeks, x days, x hours etc</p>
-      <p>
-        Follow us on Twitter
-        <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
-        so you never miss an event.
-      </p>
-    </div>
-    <div class="section">
+    <section class="hero">
+      <div class="left">
+        <h1>webdev<wbr /><span class="text-gradient">.london</span></h1>
+        <p>The meetup for everyone who loves the web, coming soon.</p>
+      </div>
+      <div class="right">
+        <p>Next event @ 71 Carter Lane, St Pauls, London</p>
+        <div id="countdown"></div>
+        <p>Free to attend! Reserve your place on Meetup.</p>
+        <p>
+          Follow us on Twitter
+          <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
+          so you never miss an event.
+        </p>
+      </div>
+    </section>
+    <Tech />
+    <section class="agenda">
       <p>This week's meetup agenda:</p>
       <p>
         Angus Findlay (@angusjf): <em>
@@ -51,11 +35,8 @@ const tech = [
       <p>
         Dan Belo Gonçalves (@?): <em>"Using XState on the Backend? idk"</em>
       </p>
-    </div>
-    <p class="section tech">
-      {tech.map((x) => <img alt={x} src={`/${x}.svg`} />)}
-    </p>
-    <div class="section">
+    </section>
+    <section class="about">
       <p>
         A place for people of all skill levels, whether you want to chat about
         cloud migrations or hello world.
@@ -77,15 +58,26 @@ const tech = [
         We're independent and community-organised. If you'd like to help us out,
         host or sponsor an event, please reach out - we'd love to hear from you.
       </p>
-    </div>
+    </section>
   </main>
 </Layout>
+
+<script>
+  const nextMeetupDate = new Date(2023, 11, 15, 7, 0);
+
+  const countdown = document.getElementById("countdown")!;
+  const updateTimer = () => {
+    const timeRemainingMS = nextMeetupDate - Date.now();
+    const secondsRemaining = (timeRemainingMS % 1000) / 1000;
+    countdown.innerHTML = secondsRemaining.toString();
+  };
+  updateTimer();
+  setTimeout(updateTimer, 1000);
+</script>
 
 <style>
   main {
     margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
   }
   h1 {
     font-size: 4rem;
@@ -100,22 +92,38 @@ const tech = [
     background-size: 400%;
     background-position: 0%;
   }
-  .section {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
+  section {
+    max-width: var(--max-width);
+    margin: auto;
   }
-  .tech > img {
-    width: 100%;
-    height: 100%;
+</style>
+
+<style>
+  .hero {
+    background-color: var(--dark-blue);
+    color: var(--off-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5rem;
   }
-  .tech {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 50px 50px 50px;
-    gap: 1rem 2rem;
+  @media (min-width: 1000px) {
+    .hero {
+      flex-direction: row;
+    }
+  }
+  .hero > .left {
+  }
+  .hero > .right {
+    width: 30rem;
+    background-color: var(--off-white);
+    color: var(--dark-blue);
+    padding: 2rem;
+    border-radius: 0.5rem;
+  }
+</style>
+
+<style>
+  .agenda {
   }
 </style>
