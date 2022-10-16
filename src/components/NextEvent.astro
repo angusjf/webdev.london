@@ -1,0 +1,51 @@
+---
+import Countdown from "./Countdown.astro";
+
+export interface Props {
+  className: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class={`next-event ${className}`}>
+  <p>
+    Next event @ <span class="label">71 Carter Lane, St Paul's, London</span>
+  </p>
+  <Countdown />
+  <p>
+    Follow us on Twitter
+    <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
+    so you never miss an event.
+  </p>
+  <div class="footer">
+    <p>Free to attend!<br />Reserve your place on Meetup.</p>
+    <img class="meetup" src="/meetup.svg" alt="meetup" />
+  </div>
+</div>
+<style>
+  .label {
+    background-color: rgb(182, 201, 193);
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+
+  .next-event {
+    text-align: left;
+    max-width: 24rem;
+    background-color: var(--off-white);
+    color: var(--dark-blue);
+    padding: 1.5rem 2.3rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 12px 0 black;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .meetup {
+    width: 100px;
+  }
+</style>

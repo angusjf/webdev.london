@@ -3,26 +3,26 @@ const tech = [
   "ferris",
   "bun",
   "graphql",
-  "js",
+  "go",
   "svelte",
   "react",
   "aws",
+  "deno",
   "nextjs",
-  "zig",
   "elm",
-  "firebase",
-  "go",
   "vue",
+  "firebase",
   "typescript",
+  "zig",
   "lighthouse",
   "css",
   "tailwind",
-  "deno",
+  "js",
 ];
 ---
 
 <div class="tech">
-  <p>Learn about your favourite cutting edge tech</p>
+  <p>Learn & discuss exciting cutting edge technology</p>
   <div class="grid">
     {tech.map((x) => <img alt={x} src={`/${x}.svg`} />)}
   </div>
@@ -31,10 +31,11 @@ const tech = [
 <style>
   p {
     color: grey;
-    font-weight: 700;
+    font-weight: 400;
     padding-top: 2rem;
     padding-bottom: 2rem;
     text-transform: uppercase;
+    text-align: center;
   }
   .tech {
     display: flex;

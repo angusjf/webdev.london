@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Tech from "../components/Tech.astro";
-import Countdown from "../components/Countdown.astro";
+import NextEvent from "../components/NextEvent.astro";
 ---
 
 <Layout
@@ -15,56 +15,60 @@ import Countdown from "../components/Countdown.astro";
           <h1>webdev<wbr /><span class="text-gradient">.london</span></h1>
           <p>The meetup for everyone who loves the web.</p>
         </div>
-        <div class="right">
-          <p>Next event @ 71 Carter Lane, St Paul's, London</p>
-          <Countdown />
-          <p>Free to attend! Reserve your place on Meetup.</p>
-          <p>
-            Follow us on Twitter
-            <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
-            so you never miss an event.
-          </p>
-        </div>
+        <NextEvent className="right" />
       </div>
     </section>
     <Tech />
     <section class="dark agenda">
-      <p>This week's meetup agenda:</p>
-      <p>
-        Angus Findlay (Web Developer @ helloprima.co.uk): <em>
-          "Bringing SSR & SSG to your React App"
-        </em>
-      </p>
-      <p>
-        Dan Belo Gonçalves (Web Developer & Coach @ theodo.co.uk): <em
-          >"Using XState on the Backend?"</em
-        >
-      </p>
+      <div>
+        <p>This meetup's agenda:</p>
+        <p>
+          Angus Findlay (Web Developer @ helloprima.co.uk): <em>
+            "Bringing SSR & SSG to your React App"
+          </em>
+        </p>
+        <p>
+          Dan Belo Gonçalves (Web Developer & Coach @ theodo.co.uk): <em
+            >"Using XState on the Backend?"</em
+          >
+        </p>
+      </div>
     </section>
     <section class="about">
-      <p>
-        A place for people of all skill levels, whether you want to chat about
-        cloud migrations or hello world.
-      </p>
-      <p>
-        While we love online conferences & meetups, we're focussed on an
-        in-person event for now, as we believe it's the best way to build
-        community.
-      </p>
-      <p>We value diversity of attendees and speakers super highly.</p>
-      <p>
-        Want to give a talk? We'd love to hear about it! Send us a DM over at <a
-          href="https://www.twitter.com/webdev_london"
-        >
-          @webdev_london
-        </a>.
-      </p>
-      <p>
-        We're independent and community-organised. If you'd like to help us out,
-        host or sponsor an event, please reach out - we'd love to hear from you.
-      </p>
+      <div>
+        <p>
+          A place for people of all skill levels, whether you want to chat about
+          cloud migrations or hello world.
+        </p>
+        <p>
+          While we love online conferences & meetups, we're focussed on an
+          in-person event for now, as we believe it's the best way to build
+          community.
+        </p>
+        <p>We value diversity of attendees and speakers super highly.</p>
+        <p>
+          Want to give a talk? We'd love to hear about it! Send us a DM over at <a
+            href="https://www.twitter.com/webdev_london"
+          >
+            @webdev_london
+          </a>.
+        </p>
+        <p>
+          We're independent and community-organised. If you'd like to help us
+          out, host or sponsor an event, please reach out - we'd love to hear
+          from you.
+        </p>
+      </div>
     </section>
-    <section><div>Meetup link</div></section>
+    <section>
+      <div>Meetup link</div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <!-- todo lol -->
+    </section>
   </main>
 </Layout>
 
@@ -74,7 +78,7 @@ import Countdown from "../components/Countdown.astro";
   }
   h1 {
     font-size: 4rem;
-    font-weight: 800;
+    font-weight: 900;
     margin-top: 2rem;
     margin-bottom: 3rem;
   }
@@ -85,9 +89,11 @@ import Countdown from "../components/Countdown.astro";
     background-size: 400%;
     background-position: 0%;
   }
-  section > * {
+  section > div {
     max-width: var(--max-width);
     margin: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   section.dark {
     background-color: var(--dark-blue);
@@ -100,24 +106,25 @@ import Countdown from "../components/Countdown.astro";
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5rem 2rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    text-align: center;
+  }
+  .hero > .left > h1 {
+    margin-bottom: 1rem;
   }
   .hero > .left > p {
     font-size: 1.2rem;
   }
   .hero > .right {
     align-self: center;
-    max-width: 24rem;
-    background-color: var(--off-white);
-    color: var(--dark-blue);
-    padding: 2rem;
-    border-radius: 0.5rem;
     margin: 0;
     margin-top: 3rem;
   }
   @media (min-width: 1000px) {
     .hero {
       flex-direction: row;
+      text-align: start;
     }
     .hero > .right {
       margin-top: 0rem;

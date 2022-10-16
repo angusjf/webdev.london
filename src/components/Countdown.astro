@@ -1,15 +1,47 @@
 ---
 ---
 
-<div id="countdown"></div>
+<div class="countdown">
+  <div id="w" class="number"></div> weeks
+  <div id="d" class="number"></div> days
+  <div id="h" class="number"></div> h
+  <div id="m" class="number"></div> m
+  <div id="s" class="number"></div> s
+</div>
+
+<style>
+  .countdown {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .number {
+    background-color: rgb(182, 201, 193);
+    padding: 2px 4px;
+    border-radius: 3px;
+    width: 2ch;
+    margin-top: -2px;
+    margin-right: 4px;
+    margin-left: 8px;
+    font-family: monospace;
+  }
+
+  .number:first-child {
+    margin-left: 0px;
+  }
+</style>
 
 <script>
   const nextMeetupDate = new Date(2022, 11, 15, 7, 0);
 
-  const countdown = document.getElementById("countdown")!;
-  const updateTimer = () => {
-    // @ts-ignore: why can't i subtract dates?
-    let timeRemainingMS = nextMeetupDate - Date.now();
+  const wElem = document.getElementById("w")!;
+  const dElem = document.getElementById("d")!;
+  const hElem = document.getElementById("h")!;
+  const mElem = document.getElementById("m")!;
+  const sElem = document.getElementById("s")!;
+
+  const between = (from: Date, to: Date) => {
+    let timeRemainingMS = Math.abs(to.valueOf() - from.valueOf());
 
     timeRemainingMS -= timeRemainingMS % 1000;
 
@@ -28,8 +60,19 @@
 
     const w = timeRemainingMS / (1000 * 60 * 60 * 24 * 7);
 
-    countdown.innerHTML = `${w} weeks ${d} days ${h}h ${m}m ${s}s`;
+    return { w, d, h, m, s };
   };
+
+  const updateTimer = () => {
+    let { w, d, h, m, s } = between(new Date(), nextMeetupDate);
+    wElem.innerHTML = w.toString().padStart(2, "0");
+    dElem.innerHTML = d.toString().padStart(2, "0");
+    hElem.innerHTML = h.toString().padStart(2, "0");
+    mElem.innerHTML = m.toString().padStart(2, "0");
+    sElem.innerHTML = s.toString().padStart(2, "0");
+  };
+
   updateTimer();
+
   setInterval(updateTimer, 1000);
 </script>
