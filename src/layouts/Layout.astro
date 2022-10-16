@@ -1,4 +1,6 @@
 ---
+import Header from "../components/Header.astro";
+
 export interface Props {
   title: string;
   description: string;
@@ -13,17 +15,11 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon-32.png" />
-    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="/"><img alt="" class="logo" src="/logo.png" /></a>
-        <div></div>
-      </nav>
-    </header>
+    <Header />
     <slot />
     <style is:global>
       :root {
@@ -36,31 +32,16 @@ const { title, description } = Astro.props;
         );
         --off-white: #f6f6f6;
         --dark-blue: rgb(28, 26, 32);
-        --max-width: 80rem;
+        --max-width: 70rem;
+        font-size: 16px;
       }
       html {
         font-family: system-ui, sans-serif;
-        background-color: var(--dark-blue);
-        color: var(--off-white);
-      }
-      header {
-        padding: 0.5rem;
         background-color: var(--off-white);
-        color: var(--dark-blue);
-      }
-      header > nav {
-        margin: auto;
-        max-width: var(--max-width);
-        display: flex;
-        align-content: center;
-        flex-direction: row;
+        color: var(--dark-white);
       }
       body {
         margin: 0;
-      }
-      .logo {
-        width: 2rem;
-        height: 2rem;
       }
       code {
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,

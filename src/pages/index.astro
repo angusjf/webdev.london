@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Tech from "../components/Tech.astro";
+import Countdown from "../components/Countdown.astro";
 ---
 
 <Layout
@@ -8,32 +9,36 @@ import Tech from "../components/Tech.astro";
   description="The meetup for everyone who loves the web, coming soon."
 >
   <main>
-    <section class="hero">
-      <div class="left">
-        <h1>webdev<wbr /><span class="text-gradient">.london</span></h1>
-        <p>The meetup for everyone who loves the web, coming soon.</p>
-      </div>
-      <div class="right">
-        <p>Next event @ 71 Carter Lane, St Pauls, London</p>
-        <div id="countdown"></div>
-        <p>Free to attend! Reserve your place on Meetup.</p>
-        <p>
-          Follow us on Twitter
-          <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
-          so you never miss an event.
-        </p>
+    <section class="dark">
+      <div class="hero">
+        <div class="left">
+          <h1>webdev<wbr /><span class="text-gradient">.london</span></h1>
+          <p>The meetup for everyone who loves the web.</p>
+        </div>
+        <div class="right">
+          <p>Next event @ 71 Carter Lane, St Paul's, London</p>
+          <Countdown />
+          <p>Free to attend! Reserve your place on Meetup.</p>
+          <p>
+            Follow us on Twitter
+            <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
+            so you never miss an event.
+          </p>
+        </div>
       </div>
     </section>
     <Tech />
-    <section class="agenda">
+    <section class="dark agenda">
       <p>This week's meetup agenda:</p>
       <p>
-        Angus Findlay (@angusjf): <em>
+        Angus Findlay (Web Developer @ helloprima.co.uk): <em>
           "Bringing SSR & SSG to your React App"
         </em>
       </p>
       <p>
-        Dan Belo Gonçalves (@?): <em>"Using XState on the Backend? idk"</em>
+        Dan Belo Gonçalves (Web Developer & Coach @ theodo.co.uk): <em
+          >"Using XState on the Backend?"</em
+        >
       </p>
     </section>
     <section class="about">
@@ -59,21 +64,9 @@ import Tech from "../components/Tech.astro";
         host or sponsor an event, please reach out - we'd love to hear from you.
       </p>
     </section>
+    <section><div>Meetup link</div></section>
   </main>
 </Layout>
-
-<script>
-  const nextMeetupDate = new Date(2023, 11, 15, 7, 0);
-
-  const countdown = document.getElementById("countdown")!;
-  const updateTimer = () => {
-    const timeRemainingMS = nextMeetupDate - Date.now();
-    const secondsRemaining = (timeRemainingMS % 1000) / 1000;
-    countdown.innerHTML = secondsRemaining.toString();
-  };
-  updateTimer();
-  setTimeout(updateTimer, 1000);
-</script>
 
 <style>
   main {
@@ -92,38 +85,49 @@ import Tech from "../components/Tech.astro";
     background-size: 400%;
     background-position: 0%;
   }
-  section {
+  section > * {
     max-width: var(--max-width);
     margin: auto;
+  }
+  section.dark {
+    background-color: var(--dark-blue);
+    color: var(--off-white);
   }
 </style>
 
 <style>
   .hero {
-    background-color: var(--dark-blue);
-    color: var(--off-white);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5rem;
+    padding: 5rem 2rem;
+  }
+  .hero > .left > p {
+    font-size: 1.2rem;
+  }
+  .hero > .right {
+    align-self: center;
+    max-width: 24rem;
+    background-color: var(--off-white);
+    color: var(--dark-blue);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin: 0;
+    margin-top: 3rem;
   }
   @media (min-width: 1000px) {
     .hero {
       flex-direction: row;
     }
-  }
-  .hero > .left {
-  }
-  .hero > .right {
-    width: 30rem;
-    background-color: var(--off-white);
-    color: var(--dark-blue);
-    padding: 2rem;
-    border-radius: 0.5rem;
+    .hero > .right {
+      margin-top: 0rem;
+    }
   }
 </style>
 
 <style>
   .agenda {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 </style>
