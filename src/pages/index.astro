@@ -4,10 +4,10 @@ import Layout from "../layouts/Layout.astro";
 const tech = [
   "ferris",
   "bun",
-  "css",
   "graphql",
   "js",
   "svelte",
+  "react",
   "aws",
   "nextjs",
   "zig",
@@ -17,7 +17,7 @@ const tech = [
   "vue",
   "typescript",
   "lighthouse",
-  "react",
+  "css",
   "tailwind",
   "deno",
 ];
@@ -28,7 +28,7 @@ const tech = [
   description="The meetup for everyone who loves the web, coming soon."
 >
   <main>
-    <h1>webdev<span class="text-gradient">.london</span></h1>
+    <h1>webdev<wbr /><span class="text-gradient">.london</span></h1>
     <p class="section">
       The meetup for <u>everyone</u> who <u>loves the web</u>, coming soon.
     </p>
@@ -44,8 +44,9 @@ const tech = [
     <div class="section">
       <p>This week's meetup agenda:</p>
       <p>
-        Angus Findlay (@angusjf): <em>"Bringing SSR & SSG to your React App"</em
-        >
+        Angus Findlay (@angusjf): <em>
+          "Bringing SSR & SSG to your React App"
+        </em>
       </p>
       <p>
         Dan Belo Gonçalves (@?): <em>"Using XState on the Backend? idk"</em>
@@ -67,8 +68,10 @@ const tech = [
       <p>We value diversity of attendees and speakers super highly.</p>
       <p>
         Want to give a talk? We'd love to hear about it! Send us a DM over at <a
-          href="https://www.twitter.com/webdev_london">@webdev_london</a
-        >.
+          href="https://www.twitter.com/webdev_london"
+        >
+          @webdev_london
+        </a>.
       </p>
       <p>
         We're independent and community-organised. If you'd like to help us out,
@@ -85,9 +88,10 @@ const tech = [
     max-width: 60ch;
   }
   h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 800;
-    margin: 0;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
   }
   .text-gradient {
     background-image: var(--accent-gradient);
@@ -111,7 +115,7 @@ const tech = [
   .tech {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(3, 100px);
-    gap: 12px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 1rem 2rem;
   }
 </style>
