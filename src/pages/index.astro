@@ -4,6 +4,7 @@ import Tech from "../components/Tech.astro";
 import NextEvent from "../components/NextEvent.astro";
 import { nextEvent } from "../nextEvent";
 import AgendaItem from "../components/AgendaItem.astro";
+import ManifestoItem from "../components/ManifestoItem.astro";
 ---
 
 <Layout
@@ -21,46 +22,40 @@ import AgendaItem from "../components/AgendaItem.astro";
       </div>
     </section>
     <Tech />
-    <section class="dark agenda">
-      <div>
-        <p>This meetup's agenda:</p>
+    <section class="dark">
+      <div class="agenda">
+        <p>This meetup's agenda</p>
         {nextEvent.agenda.map((props) => <AgendaItem {...props} />)}
       </div>
     </section>
     <section class="about">
       <div>
-        <p>
-          A place for people of all skill levels, whether you want to chat about
-          cloud migrations or hello world.
-        </p>
-        <p>
-          While we love online conferences & meetups, we're focussed on an
-          in-person event for now, as we believe it's the best way to build
-          community.
-        </p>
-        <p>We value diversity of attendees and speakers super highly.</p>
-        <p>
-          Want to give a talk? We'd love to hear about it! Send us a DM over at <a
-            href="https://www.twitter.com/webdev_london"
-          >
-            @webdev_london
-          </a>.
-        </p>
-        <p>
-          We're independent and community-organised. If you'd like to help us
-          out, host or sponsor an event, please reach out - we'd love to hear
-          from you.
-        </p>
+        <div class="manifesto">
+          <ManifestoItem emoji="🌍">
+            A place for people of all skill levels, whether you want to chat
+            about cloud migrations or hello world. We value diversity of
+            attendees and speakers super highly.
+          </ManifestoItem>
+          <ManifestoItem emoji="⚡️">
+            We're an in-person only event. While we love online conferences &
+            meetups, we believe the best place to build community is IRL.
+          </ManifestoItem>
+          <ManifestoItem emoji="💡">
+            Want to give a talk? We'd love to hear about it! Send us a DM over
+            at <a href="https://www.twitter.com/webdev_london">
+              @webdev_london
+            </a>.
+          </ManifestoItem>
+          <ManifestoItem emoji="💘">
+            We're independent and community-organised. If you'd like to help us
+            out, host or sponsor an event, please reach out - we'd love to hear
+            from you.
+          </ManifestoItem>
+        </div>
+        <div class="finale">
+          <img alt="meetup" src="/meetup.svg" />
+        </div>
       </div>
-    </section>
-    <section>
-      <div>Meetup link</div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <!-- todo lol -->
     </section>
   </main>
 </Layout>
@@ -85,6 +80,8 @@ import AgendaItem from "../components/AgendaItem.astro";
   section > div {
     max-width: var(--max-width);
     margin: auto;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
     padding-left: 2rem;
     padding-right: 2rem;
   }
@@ -93,14 +90,43 @@ import AgendaItem from "../components/AgendaItem.astro";
     color: var(--off-white);
   }
 </style>
+<style>
+  .manifesto {
+    display: grid;
+    gap: 2rem 2rem;
+  }
+  @media (min-width: 700px) {
+    .manifesto {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .finale {
+    display: flex;
+    margin-top: 5rem;
+    justify-content: center;
+  }
+</style>
+
+<style>
+  .agenda > p {
+    color: rgb(235, 235, 235);
+    font-weight: 400;
+    padding-top: 0rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .agenda {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+</style>
 
 <style>
   .hero {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 3rem;
-    padding-bottom: 5rem;
     text-align: center;
   }
   .hero > .left > h1 {
@@ -116,19 +142,11 @@ import AgendaItem from "../components/AgendaItem.astro";
   }
   @media (min-width: 1000px) {
     .hero {
-      padding-top: 5rem;
       flex-direction: row;
       text-align: start;
     }
     .hero > .right {
       margin-top: 0rem;
     }
-  }
-</style>
-
-<style>
-  .agenda {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 </style>

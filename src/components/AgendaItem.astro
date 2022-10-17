@@ -8,6 +8,28 @@ export interface Props {
 const { name, description, title } = Astro.props;
 ---
 
-<p>
-  {name} ({description}): <em>{title}</em>
-</p>
+<div class="card">
+  <div>
+    <div>{name}</div>
+    <div>({description})</div>
+  </div>
+  <div>{title}</div>
+</div>
+
+<style>
+  .card {
+    display: flex;
+    gap: 2rem;
+    max-width: 700px;
+    background-color: var(--off-white);
+    color: var(--dark-blue);
+    padding: 2rem;
+    border-radius: 0.5rem;
+  }
+  .card:nth-child(even) {
+    align-self: flex-start;
+  }
+  .card:nth-child(odd) {
+    align-self: flex-end;
+  }
+</style>

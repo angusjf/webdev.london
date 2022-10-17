@@ -1,0 +1,33 @@
+---
+export interface Props {
+  emoji: string;
+}
+
+const { emoji } = Astro.props;
+---
+
+<div>
+  <span>{emoji}</span>
+  <p><slot /></p>
+</div>
+
+<style>
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  div > span {
+    font-size: 2rem;
+    background-color: white;
+    border-radius: 16px;
+    padding: 4px;
+    min-width: 50px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(var(--accent));
+  }
+</style>
