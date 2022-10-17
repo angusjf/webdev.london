@@ -2,11 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Tech from "../components/Tech.astro";
 import NextEvent from "../components/NextEvent.astro";
+import { nextEvent } from "../nextEvent";
+import AgendaItem from "../components/AgendaItem.astro";
 ---
 
 <Layout
-  title="webdev.london"
-  description="The meetup for everyone who loves the web, coming soon."
+  title="webdev.london | The meetup for everyone who loves the web."
+  description="The in-person meetup in London for everything new & exciting in web development."
 >
   <main>
     <section class="dark">
@@ -22,16 +24,7 @@ import NextEvent from "../components/NextEvent.astro";
     <section class="dark agenda">
       <div>
         <p>This meetup's agenda:</p>
-        <p>
-          Angus Findlay (Web Developer @ helloprima.co.uk): <em>
-            "Bringing SSR & SSG to your React App"
-          </em>
-        </p>
-        <p>
-          Dan Belo Gonçalves (Web Developer & Coach @ theodo.co.uk): <em
-            >"Using XState on the Backend?"</em
-          >
-        </p>
+        {nextEvent.agenda.map((props) => <AgendaItem {...props} />)}
       </div>
     </section>
     <section class="about">

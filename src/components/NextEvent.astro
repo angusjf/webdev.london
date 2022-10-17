@@ -1,4 +1,5 @@
 ---
+import { nextEvent } from "../nextEvent";
 import Countdown from "./Countdown.astro";
 
 export interface Props {
@@ -10,9 +11,9 @@ const { className } = Astro.props;
 
 <div class={`next-event ${className}`}>
   <p>
-    Next event @ <span class="label">71 Carter Lane, St Paul's, London</span>
+    Next event @ <span class="label">{nextEvent.venue}</span>
   </p>
-  <Countdown />
+  <Countdown to={nextEvent.date} />
   <p>
     Follow us on Twitter
     <a href="https://www.twitter.com/webdev_london">@webdev_london</a>

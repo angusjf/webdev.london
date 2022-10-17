@@ -1,12 +1,17 @@
 ---
+export interface Props {
+  to: Date;
+}
+
+const { to } = Astro.props;
 ---
 
 <div class="countdown">
-  <div id="w" class="number"></div> weeks
-  <div id="d" class="number"></div> days
-  <div id="h" class="number"></div> h
-  <div id="m" class="number"></div> m
-  <div id="s" class="number"></div> s
+  <span id="w" class="number"></span> weeks
+  <span id="d" class="number"></span> days
+  <span id="h" class="number"></span> h
+  <span id="m" class="number"></span> m
+  <span id="s" class="number"></span> s
 </div>
 
 <style>
@@ -31,16 +36,14 @@
   }
 </style>
 
-<script>
-  const nextMeetupDate = new Date(2022, 11, 15, 7, 0);
+<script define:vars={{ to }}>
+  const wElem = document.getElementById("w");
+  const dElem = document.getElementById("d");
+  const hElem = document.getElementById("h");
+  const mElem = document.getElementById("m");
+  const sElem = document.getElementById("s");
 
-  const wElem = document.getElementById("w")!;
-  const dElem = document.getElementById("d")!;
-  const hElem = document.getElementById("h")!;
-  const mElem = document.getElementById("m")!;
-  const sElem = document.getElementById("s")!;
-
-  const between = (from: Date, to: Date) => {
+  const between = (from, to) => {
     let timeRemainingMS = Math.abs(to.valueOf() - from.valueOf());
 
     timeRemainingMS -= timeRemainingMS % 1000;
@@ -64,7 +67,7 @@
   };
 
   const updateTimer = () => {
-    let { w, d, h, m, s } = between(new Date(), nextMeetupDate);
+    let { w, d, h, m, s } = between(new Date(), new Date(to));
     wElem.innerHTML = w.toString().padStart(2, "0");
     dElem.innerHTML = d.toString().padStart(2, "0");
     hElem.innerHTML = h.toString().padStart(2, "0");
