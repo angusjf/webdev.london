@@ -2,7 +2,7 @@ module Countdown exposing (main, propsDecoder)
 
 import Browser
 import Html exposing (Html, div, span, text)
-import Html.Attributes exposing (class, id)
+import Html.Attributes exposing (class)
 import Json.Decode exposing (Value)
 import Task
 import Time exposing (Posix, millisToPosix, posixToMillis)
@@ -23,81 +23,75 @@ decodeFlags : Value -> Props
 decodeFlags value =
     value
         |> Json.Decode.decodeValue propsDecoder
-        |> Result.withDefault { to = millisToPosix 10000, from = millisToPosix 0 }
+        |> Result.withDefault { to = millisToPosix 0, from = millisToPosix 0 }
 
 
 propsDecoder : Json.Decode.Decoder Props
 propsDecoder =
     Json.Decode.map2 Props
-        (Json.Decode.field "to" (Json.Decode.map millisToPosix <| Json.Decode.int))
-        (Json.Decode.field "from" (Json.Decode.map millisToPosix <| Json.Decode.int))
+        (Json.Decode.field "to" decodeTimestamp)
+        (Json.Decode.field "from" decodeTimestamp)
 
 
-mod : Float -> Int -> Float
-mod x y =
-    toFloat <| modBy y (floor x)
+decodeTimestamp : Json.Decode.Decoder Posix
+decodeTimestamp =
+    Json.Decode.map millisToPosix <| Json.Decode.int
 
 
-between : Posix -> Posix -> { w : Float, d : Float, h : Float, m : Float, s : Float }
-between from to =
-    let
-        msrMs =
-            toFloat <| abs (posixToMillis to) - posixToMillis from
+break : Int -> List Int -> List Int
+break n buckets =
+    case buckets of
+        [] ->
+            []
 
-        msrSeconds =
-            msrMs - mod msrMs 1000
+        bucket :: more ->
+            let
+                catch =
+                    floor <| toFloat n / toFloat bucket
+            in
+            catch :: break (n - (catch * bucket)) more
 
-        s =
-            mod msrSeconds (1000 * 60) / 1000
 
-        msrMins =
-            msrSeconds - s * 1000
+accumulate : List number -> List number
+accumulate l =
+    case l of
+        x :: xs ->
+            x :: List.map ((*) x) (accumulate xs)
 
-        m =
-            mod msrMins (1000 * 60 * 60) / (1000 * 60)
+        [] ->
+            []
 
-        msrHours =
-            msrMins - m * 1000 * 60
 
-        h =
-            mod msrHours (1000 * 60 * 60 * 24) / (1000 * 60 * 60)
-
-        msrDays =
-            msrHours - h * 1000 * 60 * 60
-
-        d =
-            mod msrDays (1000 * 60 * 60 * 24 * 7) / (1000 * 60 * 60 * 24)
-
-        msrWeeks =
-            msrDays - d * 1000 * 60 * 60 * 24
-
-        w =
-            msrWeeks / (1000 * 60 * 60 * 24 * 7)
-    in
-    { w = w, d = d, h = h, m = m, s = s }
+segments : List ( String, number )
+segments =
+    [ ( "s", 1000 ), ( "m", 60 ), ( "h", 60 ), ( "days", 24 ), ( "weeks", 7 ) ]
 
 
 view : Props -> Html msg
 view { from, to } =
-    let
-        { w, d, h, m, s } =
-            between from to
-
-        fmt =
-            floor >> String.fromInt >> String.padLeft 2 '0' >> text
-    in
-    div [ class "countdown" ]
-        [ span [ id "w", class "number" ] [ fmt w ]
-        , text "weeks"
-        , span [ id "d", class "number" ] [ fmt d ]
-        , text "days"
-        , span [ id "h", class "number" ] [ fmt h ]
-        , text "h"
-        , span [ id "m", class "number" ] [ fmt m ]
-        , text "m"
-        , span [ id "s", class "number" ] [ fmt s ]
-        , text "s"
-        ]
+    segments
+        |> List.map Tuple.second
+        |> accumulate
+        |> List.reverse
+        |> break (abs (posixToMillis to) - posixToMillis from)
+        |> List.map2
+            (\label n ->
+                [ span
+                    [ class "number" ]
+                    [ n
+                        |> String.fromInt
+                        |> String.padLeft 2 '0'
+                        |> text
+                    ]
+                , text label
+                ]
+            )
+            (segments
+                |> List.reverse
+                |> List.map Tuple.first
+            )
+        |> List.concat
+        |> div [ class "countdown" ]
 
 
 update : Posix -> Props -> ( Props, Cmd Posix )
@@ -112,4 +106,9 @@ subscriptions _ =
 
 main : Program Value Props Posix
 main =
-    Browser.element { init = init, view = view, update = update, subscriptions = subscriptions }
+    Browser.element
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
