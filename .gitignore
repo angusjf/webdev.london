@@ -4,6 +4,7 @@ pnpm-debug.log*
 .env
 .env.production
 .DS_Store
+elm-stuff
 
 # i just use this folder for pxm files etc
 design

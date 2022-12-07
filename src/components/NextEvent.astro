@@ -1,6 +1,6 @@
 ---
 import { nextEvent } from "../nextEvent";
-import Countdown from "./Countdown.astro";
+import Countdown from "./Countdown.elm";
 
 export interface Props {
   className: string;
@@ -13,7 +13,11 @@ const { className } = Astro.props;
   <p>
     Next event @ <span class="label">{nextEvent.venue}</span>
   </p>
-  <Countdown to={nextEvent.date} />
+  <Countdown
+    client:load
+    from={new Date().getTime()}
+    to={nextEvent.date.getTime()}
+  />
   <p>
     Follow us on Twitter
     <a href="https://www.twitter.com/webdev_london">@webdev_london</a>
@@ -65,5 +69,26 @@ const { className } = Astro.props;
 
   .meetup {
     width: 100px;
+  }
+</style>
+<style is:global>
+  .countdown {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .number {
+    background-color: rgb(182, 201, 193);
+    padding: 2px 4px;
+    border-radius: 3px;
+    width: 2ch;
+    margin-top: -2px;
+    margin-right: 4px;
+    margin-left: 8px;
+    font-family: monospace;
+  }
+
+  .number:first-child {
+    margin-left: 0px;
   }
 </style>
