@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^2.3.5",
     "astro": "1.6",
     "astro-integration-elm": "^0.0.4",
     "elm": "0.19.1-5"
