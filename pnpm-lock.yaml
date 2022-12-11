@@ -3,14 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   '@astrojs/vercel': ^2.3.5
   astro: '1.6'
-  astro-integration-elm: ^0.0.4
+  astro-integration-elm: 0.0.9
   elm: 0.19.1-5
   prettier-plugin-astro: ^0.5.5
 
 dependencies:
   '@astrojs/vercel': 2.3.5
   astro: 1.6.13
-  astro-integration-elm: 0.0.4_astro@1.6.13+elm@0.19.1-5
+  astro-integration-elm: 0.0.9_astro@1.6.13+elm@0.19.1-5
   elm: 0.19.1-5
 
 devDependencies:
@@ -777,8 +777,8 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /astro-integration-elm/0.0.4_astro@1.6.13+elm@0.19.1-5:
-    resolution: {integrity: sha512-gFjAVftUmy61ILGK7oOhHFfJMrRu47tF0J7ig3ztKKuDMRSeqmwSm2nZrJbow4VjzF005C6GE6TqcuYlnN0kyQ==}
+  /astro-integration-elm/0.0.9_astro@1.6.13+elm@0.19.1-5:
+    resolution: {integrity: sha512-tD+gowXSNjTg9f8M3g4yfUhkNrZbr3s0oyAgxDhGJlTqc9oWv8puB6yaa0yshN+p4TMlD5Xhi93fX8ztXxWhiA==}
     peerDependencies:
       astro: '>=1.6.0'
       elm: ^0.19.1-5
