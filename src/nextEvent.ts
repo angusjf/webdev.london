@@ -1,5 +1,5 @@
 export const nextEvent = {
-  date: new Date(2022, 11, 15, 7, 0),
+  date: new Date(2023, 2, 15, 7, 0),
   venue: "71 Carter Lane, St Paul's, London",
   agenda: [
     {
